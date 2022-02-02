@@ -81,7 +81,7 @@ namespace GildedRoseKata
             {
                 if (item.Quality < 50)
                 {
-                    item.Quality = item.Quality + 1;
+                    item.Quality++;
                 }
             }
 
@@ -89,7 +89,7 @@ namespace GildedRoseKata
             {
                 if (item.Quality < 50)
                 {
-                    item.Quality = item.Quality + 1;
+                    item.Quality++;
                 }
             }
 
