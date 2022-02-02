@@ -8,8 +8,7 @@ namespace GildedRoseTests
     {
         [Theory]
         [InlineData(15, 10, 14, 9)]
-        [InlineData(0, 10, 0, 9)]
-        [InlineData(0, -1, 0, -2)]
+        [InlineData(50, 10, 49, 9)]
         public void ShouldUpdateQualityAndSellinForStandardItem(int quality, int sellin, int expectedQuality, int expectedSellin)
         {
             var itemName = "some standard item";
@@ -177,6 +176,59 @@ namespace GildedRoseTests
             Assert.Equal(expectedQuality, Items[0].Quality);
         }
 
+        [Theory]
+        [InlineData(15, 10, 13, 9)]
+        [InlineData(50, 10, 48, 9)]
+        public void ShouldUpdateQualityAndSellinForConjuredItem(int quality, int sellin, int expectedQuality, int expectedSellin)
+        {
+            var itemName = "Conjured Mana Cake";
+
+            var Items = new List<Item> { new Item { Name = itemName, SellIn = sellin, Quality = quality } };
+            GildedRose app = new(Items);
+
+            app.UpdateQuality();
+            Assert.Equal(itemName, Items[0].Name);
+            Assert.Equal(expectedSellin, Items[0].SellIn);
+            Assert.Equal(expectedQuality, Items[0].Quality);
+        }
+
+        [Theory]
+        [InlineData(25, -1, 21, -2)]
+        [InlineData(10, -5, 6, -6)]
+        [InlineData(4, -1, 0, -2)]
+        [InlineData(4, 0, 0, -1)]
+        public void ShouldDegradeQualityTwiceAsFastForConjuredItemAfterSellDate(int quality, int sellin, int expectedQuality, int expectedSellin)
+        {
+            var itemName = "Conjured Mana Cake";
+
+            var Items = new List<Item> { new Item { Name = itemName, SellIn = sellin, Quality = quality } };
+            GildedRose app = new(Items);
+
+            app.UpdateQuality();
+            Assert.Equal(itemName, Items[0].Name);
+            Assert.Equal(expectedSellin, Items[0].SellIn);
+            Assert.Equal(expectedQuality, Items[0].Quality);
+        }
+
+        [Theory]
+        [InlineData(0, 0, 0, -1)]
+        [InlineData(0, -1, 0, -2)]
+        [InlineData(1, -1, 0, -2)]
+        [InlineData(2, -1, 0, -2)]
+        [InlineData(3, -1, 0, -2)]
+        [InlineData(4, -1, 0, -2)]
+        public void ShouldNeverTakeQualityToNegativeForConjured(int quality, int sellin, int expectedQuality, int expectedSellin)
+        {
+            var itemName = "Conjured Mana Cake";
+
+            var Items = new List<Item> { new Item { Name = itemName, SellIn = sellin, Quality = quality } };
+            GildedRose app = new(Items);
+
+            app.UpdateQuality();
+            Assert.Equal(itemName, Items[0].Name);
+            Assert.Equal(expectedSellin, Items[0].SellIn);
+            Assert.Equal(expectedQuality, Items[0].Quality);
+        }
     }
 }
 
