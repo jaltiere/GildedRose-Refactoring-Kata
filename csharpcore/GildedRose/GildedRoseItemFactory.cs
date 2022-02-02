@@ -20,19 +20,19 @@ namespace GildedRoseKata
             ClassMap = new Dictionary<Func<Item, bool>, Func<Item, GildedRoseItem>>
             {
                 {
-                    m => m.Name.Equals("aged brie", System.StringComparison.CurrentCultureIgnoreCase),
+                    m => m.Name.Equals("aged brie", StringComparison.CurrentCultureIgnoreCase),
                     (i) => new AgedBrieItem(i)
                 },
                 {
-                    m => LegendaryItems.Any(i => i.Equals(m.Name, System.StringComparison.CurrentCultureIgnoreCase)),
+                    m => LegendaryItems.Any(i => i.Equals(m.Name, StringComparison.CurrentCultureIgnoreCase)),
                     (i) => new LegendaryItem(i)
                 },
                 {
-                    m => m.Name.StartsWith("backstage passes", System.StringComparison.CurrentCultureIgnoreCase),
+                    m => m.Name.StartsWith("backstage passes", StringComparison.CurrentCultureIgnoreCase),
                     (i) => new BackstagePassItem(i)
                 },
                 {
-                    m => m.Name.StartsWith("conjured", System.StringComparison.CurrentCultureIgnoreCase),
+                    m => m.Name.StartsWith("conjured", StringComparison.CurrentCultureIgnoreCase),
                     (i) => new ConjuredItem(i)
                 }
             };

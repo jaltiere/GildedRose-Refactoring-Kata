@@ -14,18 +14,12 @@
             // Quality goes up the closer to the event we get.
             if (Item.SellIn < 11)
             {
-                if (Item.Quality < 50)
-                {
-                    Item.Quality++;
-                }
+                Item.Quality++;
             }
 
             if (Item.SellIn < 6)
             {
-                if (Item.Quality < 50)
-                {
-                    Item.Quality++;
-                }
+                Item.Quality++;
             }
 
             // If we pass the sell date quality becomes 0.

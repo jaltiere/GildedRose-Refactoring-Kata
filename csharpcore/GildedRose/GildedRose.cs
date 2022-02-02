@@ -26,7 +26,9 @@ namespace GildedRoseKata
 
         void UpdateItem(Item item)
         {
+            // Get the correct instance based on item being processed.
             var gildedRoseItem = ItemFactory.Create(item);
+
             gildedRoseItem.UpdateItem();
 
             // Quality can't fall below 0.
