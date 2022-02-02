@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace GildedRoseKata
 {
@@ -7,12 +6,10 @@ namespace GildedRoseKata
     {
         GildedRoseItemFactory ItemFactory;
         IList<Item> Items;
-        
 
         public GildedRose(IList<Item> itemList)
         {
             Items = itemList;
-
             ItemFactory = new GildedRoseItemFactory();
         }
 
@@ -30,18 +27,7 @@ namespace GildedRoseKata
             var gildedRoseItem = ItemFactory.Create(item);
 
             gildedRoseItem.UpdateItem();
-
-            // Quality can't fall below 0.
-            if (item.Quality < 0)
-            {
-                item.Quality = 0;
-            }
-
-            // Quality can't go above 50.
-            if (item.Quality > 50)
-            {
-                item.Quality = 50;
-            }
+            gildedRoseItem.ValidateProperties();
         }
     }
 }
